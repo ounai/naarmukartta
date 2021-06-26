@@ -1,8 +1,26 @@
+import { useEffect, useRef } from 'react';
+
 import { L } from 'leaflet';
-import { MapContainer, TileLayer, LayersControl } from 'react-leaflet';
+import { useMap, useMapEvents, MapContainer, MapConsumer, TileLayer, LayersControl } from 'react-leaflet';
+
+import config from '../config';
+import { savePosition, loadPosition } from '../services/map';
 
 import 'leaflet/dist/leaflet.css';
 import 'react-leaflet-markercluster/dist/styles.min.css';
+
+const PositionSaver = () => {
+  const map = useMap();
+
+  const onMapMoved = event => savePosition(map.getCenter(), map.getZoom());
+
+  useMapEvents({
+    zoomend: onMapMoved,
+    moveend: onMapMoved
+  });
+
+  return null;
+};
 
 const OSMBaseLayer = () => (
   <LayersControl.BaseLayer name="OpenStreetMap" checked>
@@ -14,11 +32,12 @@ const OSMBaseLayer = () => (
 );
 
 const Map = ({ style, children }) => {
-  const defaultPosition = [60.2174829, 24.8095368];
-  const defaultZoom = 13;
+  const { position, zoom } = loadPosition(config.defaultPosition, config.defaultZoom);
 
   return (
-    <MapContainer center={defaultPosition} zoom={defaultZoom} style={style}>
+    <MapContainer center={position} zoom={zoom} style={style}>
+      <PositionSaver />
+
       <LayersControl position="topright">
         <OSMBaseLayer />
         

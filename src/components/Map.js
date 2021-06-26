@@ -28,7 +28,7 @@ const OSMBaseLayer = () => (
 );
 
 const Map = ({ style, children }) => {
-  const { position, zoom } = loadPosition(config.defaultPosition, config.defaultZoom);
+  const { position, zoom } = loadPosition(config.map.defaultPosition, config.map.defaultZoom);
 
   return (
     <MapContainer center={position} zoom={zoom} style={style}>

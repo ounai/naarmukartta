@@ -1,12 +1,8 @@
-import { useEffect, useRef } from 'react';
-
-import { L } from 'leaflet';
-import { useMap, useMapEvents, MapContainer, MapConsumer, TileLayer, LayersControl } from 'react-leaflet';
+import { useMap, useMapEvents, MapContainer, TileLayer, LayersControl } from 'react-leaflet';
 
 import config from '../config';
 import { savePosition, loadPosition } from '../services/map';
 
-import 'leaflet/dist/leaflet.css';
 import 'react-leaflet-markercluster/dist/styles.min.css';
 
 const PositionSaver = () => {

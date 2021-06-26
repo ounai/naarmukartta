@@ -1,7 +1,9 @@
-import { useMap, useMapEvents, MapContainer, TileLayer, LayersControl } from 'react-leaflet';
+import { useMap, useMapEvents, MapContainer, LayersControl } from 'react-leaflet';
 
 import config from '../config';
 import { savePosition, loadPosition } from '../services/map';
+
+import BaseLayers from './BaseLayers';
 
 import 'react-leaflet-markercluster/dist/styles.min.css';
 
@@ -18,15 +20,6 @@ const PositionSaver = () => {
   return null;
 };
 
-const OSMBaseLayer = () => (
-  <LayersControl.BaseLayer name="OpenStreetMap" checked>
-    <TileLayer
-      attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-    />
-  </LayersControl.BaseLayer>
-);
-
 const Map = ({ style, children }) => {
   const { position, zoom } = loadPosition(config.map.defaultPosition, config.map.defaultZoom);
 
@@ -35,7 +28,7 @@ const Map = ({ style, children }) => {
       <PositionSaver />
 
       <LayersControl position="topright">
-        <OSMBaseLayer />
+        <BaseLayers />
         
         {children}
       </LayersControl>

@@ -3,7 +3,7 @@ import { useMap, useMapEvents, MapContainer, LayersControl } from 'react-leaflet
 import config from '../config';
 import { savePosition, loadPosition } from '../services/map';
 
-import BaseLayers from './BaseLayers';
+import BaseLayers from './layers/BaseLayers';
 
 import 'react-leaflet-markercluster/dist/styles.min.css';
 

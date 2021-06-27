@@ -1,7 +1,9 @@
 import { TileLayer, LayersControl } from 'react-leaflet';
 
-const BaseLayer = ({ name, attribution, url }) => (
-  <LayersControl.BaseLayer name={name} checked>
+import config from '../../config';
+
+const BaseLayer = ({ name, attribution, url, checked }) => (
+  <LayersControl.BaseLayer name={name} checked={checked}>
     <TileLayer attribution={attribution} url={url} />
   </LayersControl.BaseLayer>
 );
@@ -16,7 +18,11 @@ const BaseLayers = () => {
   ];
 
   return layers.map(layer => (
-    <BaseLayer key={layer.name} {...layer} />
+    <BaseLayer
+      key={layer.name}
+      checked={config.map.defaultBaseLayer === layer.name}
+      {...layer}
+    />
   ));
 };
 

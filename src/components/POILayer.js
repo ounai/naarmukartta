@@ -10,7 +10,7 @@ const POILayerContent = ({ data, provider }) => {
 };
 
 const POILayer = ({ data, provider }) => (
-  <LayersControl.Overlay name={provider.name} checked>
+  <LayersControl.Overlay name={provider.name} checked={!provider.disabledByDefault}>
     <LayerGroup>
       <POILayerContent data={data} provider={provider} />
     </LayerGroup>
